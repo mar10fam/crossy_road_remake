@@ -46,17 +46,19 @@ while True:
 
     if frog.rect.colliderect(bus.rect):
         frog.reset_position()
+    if frog.rect.colliderect(log.rect):
+        frog.move_on_log(log)
 
-        bus.move()
-
-
+    bus.move()
     log.move()
 
-    SCREEN.blit(frog.image, frog.rect)
     SCREEN.blit(bus.image, bus.rect)
     SCREEN.blit(log.image, log.rect)
+    SCREEN.blit(frog.image, frog.rect)
 
     pygame.display.flip()
+
+    # This allows the user to close the window
 
 
 pygame.quit()
