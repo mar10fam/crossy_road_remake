@@ -19,6 +19,18 @@ class Frog(pygame.sprite.Sprite):
         if self.rect.top >= 20:
             self.rect.centery -= Frog.MOVE_DIST
 
+    def move_down(self):
+        if self.rect.bottom <= Frog.SCREEN_DIM[1] - 20:
+            self.rect.centery += Frog.MOVE_DIST
+
+    def move_left(self):
+        if self.rect.left >= 20:
+            self.rect.centerx -= Frog.MOVE_DIST
+
+    def move_right(self):
+        if self.rect.right <= Frog.SCREEN_DIM[0] - 20:
+            self.rect.centerx += Frog.MOVE_DIST
+
 
 
 

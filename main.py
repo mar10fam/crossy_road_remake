@@ -1,7 +1,8 @@
-import pygame
+import pygame, sys
 from frog import Frog
 
 pygame.init()
+pygame.event.set_allowed([pygame.KEYDOWN, pygame.QUIT])
 
 SCREEN_DIM = WIDTH, HEIGHT = 600, 500
 SCREEN = pygame.display.set_mode(SCREEN_DIM)
@@ -30,8 +31,17 @@ while True:
 
     pygame.display.flip()
 
-    event = pygame.event.wait()
-    if event.type == pygame.QUIT: 
-        break
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            sys.exit()
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_w:  # W
+                frog.move_up()
+            if event.key == pygame.K_a:  # A
+                frog.move_left()
+            if event.key == pygame.K_s:  # S
+                frog.move_down()
+            if event.key == pygame.K_d:  # D
+                frog.move_right()
 
 pygame.quit()
