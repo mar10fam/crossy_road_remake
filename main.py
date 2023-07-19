@@ -1,5 +1,6 @@
 import pygame, sys
 from frog import Frog
+from bus import Bus
 
 pygame.init()
 pygame.event.set_allowed([pygame.KEYDOWN, pygame.QUIT])
@@ -21,15 +22,12 @@ GRAY = (175, 175, 175)
 BLUE = (0, 0, 175)
 
 frog = Frog()
+bus = Bus(Bus.STARTING_POSITION, 'Left')
 
 while True:
 
     CLOCK.tick(FPS)
     SCREEN.fill(BLACK)
-
-    SCREEN.blit(frog.image, frog.rect)
-
-    pygame.display.flip()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -43,5 +41,13 @@ while True:
                 frog.move_down()
             if event.key == pygame.K_d:  # D
                 frog.move_right()
+
+    bus.move()
+
+    SCREEN.blit(frog.image, frog.rect)
+    SCREEN.blit(bus.image, bus.rect)
+
+    pygame.display.flip()
+
 
 pygame.quit()
