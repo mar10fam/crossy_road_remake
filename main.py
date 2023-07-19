@@ -44,7 +44,12 @@ while True:
             if event.key == pygame.K_d:  # D
                 frog.move_right()
 
-    bus.move()
+    if frog.rect.colliderect(bus.rect):
+        frog.reset_position()
+
+        bus.move()
+
+
     log.move()
 
     SCREEN.blit(frog.image, frog.rect)

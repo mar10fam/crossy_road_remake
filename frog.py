@@ -1,4 +1,6 @@
 import pygame
+from log import Log
+
 
 class Frog(pygame.sprite.Sprite):
     STARTING_POSITION = (300, 490)
@@ -7,6 +9,12 @@ class Frog(pygame.sprite.Sprite):
 
     MOVE_DIST = 10
     SCREEN_DIM = 600, 500
+
+    self.lives = 3
+
+    def reset_position(self):
+        self.rect.center = Frog.STARTING_POSITION
+        self.lives -= 1
 
     def __init__(self):
         super().__init__()
