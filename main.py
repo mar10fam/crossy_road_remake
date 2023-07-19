@@ -1,6 +1,7 @@
 import pygame, sys
 from frog import Frog
 from bus import Bus
+from log import Log
 
 pygame.init()
 pygame.event.set_allowed([pygame.KEYDOWN, pygame.QUIT])
@@ -23,6 +24,7 @@ BLUE = (0, 0, 175)
 
 frog = Frog()
 bus = Bus(Bus.STARTING_POSITION, 'Left')
+log = Log(Log.STARTING_POSITION, 'Right')
 
 while True:
 
@@ -43,9 +45,11 @@ while True:
                 frog.move_right()
 
     bus.move()
+    log.move()
 
     SCREEN.blit(frog.image, frog.rect)
     SCREEN.blit(bus.image, bus.rect)
+    SCREEN.blit(log.image, log.rect)
 
     pygame.display.flip()
 
