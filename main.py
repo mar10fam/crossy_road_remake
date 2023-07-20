@@ -45,10 +45,15 @@ for _ in range(2):
     rivers.append(River(river_height - 30, 'Right', random.randint(1, number_of_logs)))
     river_height -= 60
 
+# Scoring
+score = 0
+current_best = 0
+high_score = 0
+
 while True:
 
     CLOCK.tick(FPS)
-    SCREEN.fill(BLACK)
+    SCREEN.fill(GREEN)
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -93,6 +98,23 @@ while True:
         # Collided with River and not a Log
         if not frog_on_log and frog.rect.colliderect(river.rect):
             frog.reset_position()
+
+    # Update score
+    if 475 - frog.rect.top > current_best:
+        current_best = 475 - frog.rect.top
+    #update high score
+    if score + current_best >= high_score:
+        high_score = score + current_best
+    # If player reaches end
+    if frog.rect.top <= 60:
+        frog.reset_position()
+        frog.lives += 1
+        score += 1000 + current_best
+        current_best = 0
+    # Print statements to view score
+    print("Score: " + str(score + current_best))
+    print("High Score: " + str(high_score))
+    print("Lives: " + str(frog.lives))
 
     SCREEN.blit(frog.image, frog.rect)
 
