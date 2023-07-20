@@ -25,6 +25,7 @@ GRAY = (175, 175, 175)
 BLUE = (0, 0, 175)
 
 frog = Frog()
+log = Log(Log.STARTING_POSITION, 'Right')
 
 # Street
 streets = []
@@ -70,23 +71,28 @@ while True:
             if frog.rect.colliderect(bus.rect):
                 frog.reset_position()
 
-        # Act on rivers and logs
-        frog_on_log = False
-        for river in rivers:
-            # Draw River
-            SCREEN.fill(BLUE, river.rect)
+    if frog.rect.colliderect(log.rect):
+        frog.move_on_log(log)
 
-            # Log
-            for log in river.logs:
-                SCREEN.blit(log.image, log.rect)
-                log.move()
-                if frog.rect.colliderect(log.rect):
-                    frog.move_on_log(log)
-                    frog_on_log = True
+    log.move()
 
-            # Collided with River and not a Log
-            if not frog_on_log and frog.rect.colliderect(river.rect):
-                frog.reset_position()
+    # Act on rivers and logs
+    frog_on_log = False
+    for river in rivers:
+        # Draw River
+        SCREEN.fill(BLUE, river.rect)
+
+        # Log
+        for log in river.logs:
+            SCREEN.blit(log.image, log.rect)
+            log.move()
+            if frog.rect.colliderect(log.rect):
+                frog.move_on_log(log)
+                frog_on_log = True
+
+        # Collided with River and not a Log
+        if not frog_on_log and frog.rect.colliderect(river.rect):
+            frog.reset_position()
 
     SCREEN.blit(frog.image, frog.rect)
 
