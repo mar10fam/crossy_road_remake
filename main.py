@@ -84,6 +84,9 @@ while True:
 
         pygame.display.update()
 
+    if frog.lives == 0:
+        END_MENU = True
+
     while END_MENU:
         CLOCK.tick(15)
         SCREEN.fill(GREEN)
@@ -95,6 +98,8 @@ while True:
         SCREEN.blit(scores, (70, 180))
         SCREEN.blit(instructions, (130, 240))
 
+
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
@@ -104,6 +109,8 @@ while True:
                     current_best = 0
                     score = 0
                     frog.lives = 3
+
+        pygame.display.update()
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -125,7 +132,6 @@ while True:
             bus.move()
             if frog.rect.colliderect(bus.rect):
                 frog.reset_position()
-
 
     if frog.rect.colliderect(log.rect):
         frog.move_on_log(log)
